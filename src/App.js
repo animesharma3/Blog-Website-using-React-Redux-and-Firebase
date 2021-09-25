@@ -1,24 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
+import Header from "./components/Header/Header";
+import HomeScreen from "./screens/HomeScreen";
+import Playlists from "./components/Playlists/Playlists";
+import PlaylistContent from "./components/Playlists/PlaylistContent.js/PlaylistContent";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="sticky-top">
+        <Header />
+        <HomeScreen />
+      </div>
+      <main
+        className="container-fluid"
+        style={{ overflowY: "scroll", height: `${window.innerHeight - 184}px` }}
+      >
+        <Switch>
+          <Route path="/" exact component={Playlists} />
+          <Route path="/playlists" exact component={Playlists} />
+          <Route path="/playlists/:id" component={PlaylistContent} />
+        </Switch>
+      </main>
+    </Router>
   );
 }
 
