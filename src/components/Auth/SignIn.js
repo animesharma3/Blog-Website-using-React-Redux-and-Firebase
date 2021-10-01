@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 const SignIn = ({ signInWithGoogle }) => {
   return (
     <Button onClick={signInWithGoogle} className="btn btn-danger h-100">
-      <i className="fab fa-google-plus-g"> </i> signin
+      <i className="fab fa-google-plus-g"> </i> WALKIN
     </Button>
   );
 };

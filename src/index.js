@@ -13,7 +13,6 @@ import { getFirestore, reduxFirestore } from "redux-firestore";
 import { getFirebase, reactReduxFirebase } from "react-redux-firebase";
 import firebase from "./config/fbConfig";
 
-import { fetchPlaylists } from "./redux/actions/playlists";
 
 const store = createStore(
   reducers,
@@ -28,7 +27,6 @@ const store = createStore(
   )
 );
 
-store.dispatch(fetchPlaylists());
 
 store.firebaseAuthIsReady.then(() => {
   ReactDOM.render(

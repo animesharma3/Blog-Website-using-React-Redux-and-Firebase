@@ -1,15 +1,16 @@
 import firebase from "firebase/app";
 import "firebase/firestore";
+import "firebase/storage";
 import "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.REACT_APP_FIREBASE_PROJECTID,
-  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.REACT_APP_FIREBASE_APP_ID,
-  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
+  apiKey: "AIzaSyCcqlJ0v_UxNX9ODyeFsgfIErZ1OLqcJ7k",
+  authDomain: "beyond-the-boundaries.firebaseapp.com",
+  projectId: "beyond-the-boundaries",
+  storageBucket: "beyond-the-boundaries.appspot.com",
+  messagingSenderId: "720230825582",
+  appId: "1:720230825582:web:bd56d116700b054ea9b07f",
+  measurementId: "G-NKD34G4DJW",
 };
 
 // Initialize Firebase

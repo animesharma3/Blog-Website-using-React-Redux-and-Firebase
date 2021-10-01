@@ -10,7 +10,7 @@ const Header = ({ auth }) => {
     <Navbar variant="light" expand="lg" className="sticky-top" collapseOnSelect>
       <Container fluid>
         <LinkContainer to="/">
-          <Navbar.Brand>DATAPARADE</Navbar.Brand>
+          <Navbar.Brand>BEYOND THE BOUNDARIES</Navbar.Brand>
         </LinkContainer>
         {auth.uid ? <SignedOutLinks /> : <SignedInLinks />}
       </Container>

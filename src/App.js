@@ -1,24 +1,28 @@
+import { useState, useEffect } from "react";
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
+import ArticleDetail from "./components/Articles/ArticleDetail";
+import Articles from "./components/Articles/Articles";
 import Header from "./components/Header/Header";
+import Write from "./components/Write/Write";
 import HomeScreen from "./screens/HomeScreen";
-import Playlists from "./components/Playlists/Playlists";
-import PlaylistContent from "./components/Playlists/PlaylistContent.js/PlaylistContent";
 
 function App() {
   return (
     <Router>
       <div className="sticky-top">
         <Header />
-        <HomeScreen />
       </div>
       <main
         className="container-fluid"
-        style={{ overflowY: "scroll", height: `${window.innerHeight - 184}px` }}
+        style={{
+          overflowY: "scroll",
+          height: `${window.innerHeight}px`,
+        }}
       >
         <Switch>
-          <Route path="/" exact component={Playlists} />
-          <Route path="/playlists" exact component={Playlists} />
-          <Route path="/playlists/:id" component={PlaylistContent} />
+          <Route path="/" exact component={HomeScreen} />
+          <Route path="/write" exact component={Write} />
+          <Route path="/article/:id" component={ArticleDetail} />
         </Switch>
       </main>
     </Router>
