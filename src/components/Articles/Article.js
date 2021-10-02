@@ -12,7 +12,8 @@ const Article = ({ article }) => {
         <Row>
           <Col md={8} sm={8} xs={8}>
             <span className="text-secondary">
-              {moment(article?.createdAt.toDate()).format("LL")} · 0 views
+              {moment(article?.createdAt.toDate()).format("LL")} ·{" "}
+              {article?.views ? article?.views : 0} views
             </span>
           </Col>
           <Col md={4} sm={4} xs={4}>

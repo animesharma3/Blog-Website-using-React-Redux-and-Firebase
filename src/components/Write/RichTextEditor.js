@@ -1,11 +1,10 @@
 import React, { Component } from "react";
-import { convertToRaw, EditorState } from "draft-js";
+import { EditorState } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import { setDraft, uploadImage } from "../../redux/actions/draft";
 import { connect } from "react-redux";
-import { convertToHTML } from "draft-convert";
-import draftToHtml from "draftjs-to-html";
-import { convertFromRaw } from "draft-js";
+import firebase from "../../config/fbConfig";
+import { v4 as uuid } from "uuid";
 
 class RichTextEditor extends Component {
   constructor(props) {
@@ -15,23 +14,27 @@ class RichTextEditor extends Component {
     };
   }
   uploadImageCallBack = (file) => {
-    return new Promise((resolve, reject) => {
-      const xhr = new XMLHttpRequest();
-      xhr.open("POST", "https://api.imgur.com/3/upload");
-      xhr.setRequestHeader("Authorization", "Client-ID 2e94807bfff9df6");
-      const data = new FormData();
-      data.append("image", file);
-      xhr.send(data);
-      xhr.addEventListener("load", () => {
-        const response = JSON.parse(xhr.responseText);
-        console.log(response);
-        resolve(response);
-      });
-      xhr.addEventListener("error", () => {
-        const error = JSON.parse(xhr.responseText);
+    return new Promise(async (resolve, reject) => {
+      try {
+        const bucketName = "article-images";
+        const id = uuid();
+        let storageRef = firebase.storage().ref(`${bucketName}/${id}`);
+        await storageRef.put(file);
+        storageRef = firebase.storage().ref();
+        storageRef
+          .child(`${bucketName}/${id}`)
+          .getDownloadURL()
+          .then((url) => {
+            resolve({
+              data: {
+                link: url,
+              },
+            });
+          });
+      } catch (error) {
         console.log(error);
         reject(error);
-      });
+      }
     });
   };
   onEditorStateChange = (editorState) => {
@@ -64,8 +67,11 @@ class RichTextEditor extends Component {
             link: { inDropdown: true },
             history: { inDropdown: true },
             image: {
+              uploadEnabled: true,
+              urlEnabled: true,
+              previewImage: true,
               uploadCallback: this.uploadImageCallBack,
-              alt: { present: true, mandatory: true },
+              alt: { present: true, mandatory: false },
             },
           }}
         />

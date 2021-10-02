@@ -40,7 +40,6 @@ const Hero = ({ profile }) => {
 };
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
     profile: state.firebase.auth,
   };

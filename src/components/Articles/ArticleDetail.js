@@ -1,11 +1,16 @@
+import { useEffect } from "react";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
+import { getArticle } from "../../redux/actions/article";
 
-const ArticleDetail = ({ article }) => {
+const ArticleDetail = ({ article, getArticle, match }) => {
+  useEffect(() => {
+    getArticle(match.params.id);
+  }, []);
   return (
     <section
-      dangerouslySetInnerHTML={{ __html: article.content }}
+      dangerouslySetInnerHTML={{ __html: article?.content }}
       className="container"
     ></section>
   );
@@ -17,7 +22,13 @@ const mapStateToProps = (state, props) => {
   return { article };
 };
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getArticle: (id) => dispatch(getArticle(id)),
+  };
+};
+
 export default compose(
-  connect(mapStateToProps),
+  connect(mapStateToProps, mapDispatchToProps),
   firestoreConnect(() => [{ collection: "articles" }])
 )(ArticleDetail);
