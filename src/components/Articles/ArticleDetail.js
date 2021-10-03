@@ -7,7 +7,7 @@ import { getArticle } from "../../redux/actions/article";
 const ArticleDetail = ({ article, getArticle, match }) => {
   useEffect(() => {
     getArticle(match.params.id);
-  }, []);
+  }, [article]);
   return (
     <section
       dangerouslySetInnerHTML={{ __html: article?.content }}

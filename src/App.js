@@ -1,7 +1,5 @@
-import { useState, useEffect } from "react";
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import ArticleDetail from "./components/Articles/ArticleDetail";
-import Articles from "./components/Articles/Articles";
 import Header from "./components/Header/Header";
 import Write from "./components/Write/Write";
 import HomeScreen from "./screens/HomeScreen";
