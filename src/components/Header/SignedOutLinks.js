@@ -15,12 +15,18 @@ const SignedOutLinks = ({ auth, signOut, draft, publishDraft }) => {
   return (
     <Navbar id="basic-navbar-nav" className="right">
       <Nav className="">
-        <LinkContainer to="/write">
-          <Button className="m-1 btn btn-primary h-100" onClick={handlePublish}>
-            <i className="far fa-edit"></i>{" "}
-            {location.pathname !== "/write" ? "WRITE" : "PUBLISH"}
-          </Button>
-        </LinkContainer>
+        {auth.uid === "BeaZH3loo5UYmQRGcTjszBSNNoo1" ||
+        auth.uid === "KzRhtS5speX4To1E8s3HoheoBfB2" ? (
+          <LinkContainer to="/write">
+            <Button
+              className="m-1 btn btn-primary h-100"
+              onClick={handlePublish}
+            >
+              <i className="far fa-edit"></i>{" "}
+              {location.pathname !== "/write" ? "WRITE" : "PUBLISH"}
+            </Button>
+          </LinkContainer>
+        ) : null}
         <LinkContainer to="/">
           <Button
             className="m-1 btn btn-danger h-100"

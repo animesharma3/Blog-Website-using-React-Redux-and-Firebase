@@ -1,4 +1,5 @@
 import {
+  DELETE_ARTICLE,
   GET_ARTICLE,
   LIKE_ARTICLE,
   UNLIKE_ARTICLE,
@@ -13,6 +14,9 @@ export default (state = [], action) => {
       return state;
     case UNLIKE_ARTICLE:
       console.log("unlike article");
+      return state;
+    case DELETE_ARTICLE:
+      console.log("article deleted");
       return state;
     default:
       return state;

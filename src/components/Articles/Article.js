@@ -1,10 +1,25 @@
 import { Card, Col, Row } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import moment from "moment";
-import { likeArticle, unlikeArticle } from "../../redux/actions/article";
+import {
+  deleteArticle,
+  likeArticle,
+  unlikeArticle,
+} from "../../redux/actions/article";
 import { connect } from "react-redux";
-const Article = ({ article, likeArticle, unlikeArticle, auth }) => {
+
+const Article = ({
+  article,
+  likeArticle,
+  unlikeArticle,
+  auth,
+  deleteArticle,
+}) => {
   const handleLike = (e) => {
+    if (!auth) {
+      alert("Login First");
+      return;
+    }
     if (e.target.className.startsWith("fas")) {
       unlikeArticle(article?.id);
     } else {
@@ -13,9 +28,38 @@ const Article = ({ article, likeArticle, unlikeArticle, auth }) => {
   };
   return (
     <Card className="p-2 text-white bg-dark">
-      <LinkContainer to={`/article/${article.id}`}>
-        <h4>{article.title}</h4>
-      </LinkContainer>
+      <Row>
+        <Col md={9}>
+          <LinkContainer to={`/article/${article.id}`}>
+            <h4>{article.title}</h4>
+          </LinkContainer>
+        </Col>
+        <Col md={3}>
+          <span>
+            {auth === "BeaZH3loo5UYmQRGcTjszBSNNoo1" ||
+            auth === "KzRhtS5speX4To1E8s3HoheoBfB2" ? (
+              <>
+                <LinkContainer to="#">
+                  <Card.Link className="text-white">
+                    <i className="fas fa-edit"></i>
+                  </Card.Link>
+                </LinkContainer>
+                <LinkContainer
+                  to="#"
+                  // onClick={}
+                >
+                  <Card.Link
+                    className="text-white"
+                    onClick={() => deleteArticle(article?.id)}
+                  >
+                    <i className="fas fa-trash-alt"> </i>
+                  </Card.Link>
+                </LinkContainer>
+              </>
+            ) : null}
+          </span>
+        </Col>
+      </Row>
 
       <hr className="m-1 border-white" />
       <LinkContainer to={`/article/${article.id}`}>
@@ -60,6 +104,7 @@ const mapDispatchProps = (dispatch) => {
   return {
     likeArticle: (id) => dispatch(likeArticle(id)),
     unlikeArticle: (id) => dispatch(unlikeArticle(id)),
+    deleteArticle: (id) => dispatch(deleteArticle(id)),
   };
 };
 

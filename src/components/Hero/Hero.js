@@ -39,7 +39,7 @@ const Hero = ({ profile }) => {
           usual destinations and enjoy better holidays. Expect festival guides,
           city guides, itineraries and in depth information, that shows real
           side of travelling. One life. One world. Explore it as much as you
-          can!&nbsp
+          can.
         </Card.Text>
       </Row>
     </Card>

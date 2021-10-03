@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { connect } from "react-redux";
 import { setDraft } from "../../redux/actions/draft";
 import RichTextEditor from "./RichTextEditor";

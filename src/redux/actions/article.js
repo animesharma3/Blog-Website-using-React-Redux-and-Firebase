@@ -1,4 +1,5 @@
 import {
+  DELETE_ARTICLE,
   GET_ARTICLE,
   LIKE_ARTICLE,
   UNLIKE_ARTICLE,
@@ -77,6 +78,20 @@ export const unlikeArticle =
         .update({ ...article, likedBy: likedBy });
       dispatch({
         type: UNLIKE_ARTICLE,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+export const deleteArticle =
+  (id) =>
+  async (dispatch, getState, { getFirebase, getFirestore }) => {
+    try {
+      const firestore = getFirestore();
+      await firestore.collection("articles").doc(id).delete();
+      dispatch({
+        type: DELETE_ARTICLE,
       });
     } catch (error) {
       console.log(error);
