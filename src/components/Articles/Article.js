@@ -39,7 +39,7 @@ const Article = ({
             {auth === "BeaZH3loo5UYmQRGcTjszBSNNoo1" ||
             auth === "KzRhtS5speX4To1E8s3HoheoBfB2" ? (
               <>
-                <LinkContainer to="#">
+                <LinkContainer to={`/edit/${article?.id}`}>
                   <Card.Link className="text-white">
                     <i className="fas fa-edit"></i>
                   </Card.Link>

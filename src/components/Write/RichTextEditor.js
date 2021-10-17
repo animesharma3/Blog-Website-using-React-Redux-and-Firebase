@@ -5,14 +5,25 @@ import { setDraft, uploadImage } from "../../redux/actions/draft";
 import { connect } from "react-redux";
 import firebase from "../../config/fbConfig";
 import { v4 as uuid } from "uuid";
+import { stateFromHTML } from "draft-js-import-html";
 
 class RichTextEditor extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      editorState: EditorState.createEmpty(),
+      editorState: props.article?.content
+        ? EditorState.createWithContent(stateFromHTML(props.article.content))
+        : EditorState.createEmpty(),
     };
   }
+  // componentDidUpdate(props) {
+  //   console.log(props);
+  //   this.setState({
+  //     editorState: props.article?.content
+  //       ? EditorState.createWithContent(stateFromHTML(props.article.content))
+  //       : EditorState.createEmpty(),
+  //   });
+  // }
   uploadImageCallBack = (file) => {
     return new Promise(async (resolve, reject) => {
       try {
@@ -58,7 +69,7 @@ class RichTextEditor extends Component {
     return (
       <div className="editor">
         <Editor
-          editorState={this.props.draft.isDraft ? editorState : ""}
+          editorState={editorState}
           onEditorStateChange={this.onEditorStateChange}
           toolbar={{
             inline: { inDropdown: true },

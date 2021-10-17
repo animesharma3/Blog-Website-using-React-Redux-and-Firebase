@@ -2,14 +2,16 @@ import { LinkContainer } from "react-router-bootstrap";
 import { Navbar, Nav, Button } from "react-bootstrap";
 import { connect } from "react-redux";
 import { signOut } from "../../redux/actions/auth";
-import { useLocation } from "react-router";
+import { useHistory, useLocation, withRouter } from "react-router";
 import { publishDraft } from "../../redux/actions/draft";
 
 const SignedOutLinks = ({ auth, signOut, draft, publishDraft }) => {
   const location = useLocation();
+  const history = useHistory();
   const handlePublish = (e) => {
     if (e.target.innerText.trim() === "PUBLISH") {
       publishDraft(draft);
+      history.push("/");
     }
   };
   return (
@@ -67,4 +69,6 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignedOutLinks);
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(SignedOutLinks)
+);

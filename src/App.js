@@ -21,6 +21,7 @@ function App() {
           <Route path="/" exact component={HomeScreen} />
           <Route path="/write" exact component={Write} />
           <Route path="/article/:id" component={ArticleDetail} />
+          <Route path="/edit/:id" component={Write} />
         </Switch>
       </main>
     </Router>
